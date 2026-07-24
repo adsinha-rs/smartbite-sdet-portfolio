@@ -125,8 +125,10 @@ function App() {
         setIngredients([{ name: '', quantity: '', unit: 'g' }]); 
       }
     } catch (error) {
+      console.error("Failed to save recipe:", error);
       setAddStatus('❌ Server Error.');
     }
+    
   };
 
   if (loading) return <div style={{ textAlign: 'center', marginTop: '50px' }}><h2>Loading Dashboard... ⏳</h2></div>;
@@ -239,10 +241,31 @@ function App() {
 
           {/* MACROS DISPLAY */}
           <div style={{ display: 'flex', gap: '15px' }}>
-            <input type="number" placeholder="Calories" value={calories} onChange={(e) => setCalories(e.target.value)} required style={{...inputStyle, flex: 1, backgroundColor: '#fff9c4'}} title="Calories" />
-            <input type="number" placeholder="Protein (g)" value={protein} onChange={(e) => setProtein(e.target.value)} required style={{...inputStyle, flex: 1, backgroundColor: '#ffcdd2'}} title="Protein" />
-            <input type="number" placeholder="Carbs (g)" value={carbs} onChange={(e) => setCarbs(e.target.value)} required style={{...inputStyle, flex: 1, backgroundColor: '#ffe0b2'}} title="Carbs" />
-            <input type="number" placeholder="Fats (g)" value={fats} onChange={(e) => setFats(e.target.value)} required style={{...inputStyle, flex: 1, backgroundColor: '#c8e6c9'}} title="Fats" />
+            
+            {/* Calories */}
+            <div style={{...inputStyle, flex: 1, backgroundColor: '#fff9c4', display: 'flex', flexDirection: 'column', padding: '8px 12px'}}>
+              <span style={{fontSize: '0.75em', fontWeight: 'bold', color: '#f39c12', textTransform: 'uppercase'}}>Calories</span>
+              <input type="number" value={calories} onChange={(e) => setCalories(e.target.value)} required style={{border: 'none', background: 'transparent', outline: 'none', fontSize: '1.2em', width: '100%', marginTop: '4px'}} />
+            </div>
+
+            {/* Protein */}
+            <div style={{...inputStyle, flex: 1, backgroundColor: '#ffcdd2', display: 'flex', flexDirection: 'column', padding: '8px 12px'}}>
+              <span style={{fontSize: '0.75em', fontWeight: 'bold', color: '#c0392b', textTransform: 'uppercase'}}>Protein (g)</span>
+              <input type="number" value={protein} onChange={(e) => setProtein(e.target.value)} required style={{border: 'none', background: 'transparent', outline: 'none', fontSize: '1.2em', width: '100%', marginTop: '4px'}} />
+            </div>
+
+            {/* Carbs */}
+            <div style={{...inputStyle, flex: 1, backgroundColor: '#ffe0b2', display: 'flex', flexDirection: 'column', padding: '8px 12px'}}>
+              <span style={{fontSize: '0.75em', fontWeight: 'bold', color: '#d35400', textTransform: 'uppercase'}}>Carbs (g)</span>
+              <input type="number" value={carbs} onChange={(e) => setCarbs(e.target.value)} required style={{border: 'none', background: 'transparent', outline: 'none', fontSize: '1.2em', width: '100%', marginTop: '4px'}} />
+            </div>
+
+            {/* Fats */}
+            <div style={{...inputStyle, flex: 1, backgroundColor: '#c8e6c9', display: 'flex', flexDirection: 'column', padding: '8px 12px'}}>
+              <span style={{fontSize: '0.75em', fontWeight: 'bold', color: '#27ae60', textTransform: 'uppercase'}}>Fats (g)</span>
+              <input type="number" value={fats} onChange={(e) => setFats(e.target.value)} required style={{border: 'none', background: 'transparent', outline: 'none', fontSize: '1.2em', width: '100%', marginTop: '4px'}} />
+            </div>
+
           </div>
 
           <button type="submit" style={{ padding: '16px', backgroundImage: 'linear-gradient(to right, #2ecc71, #27ae60)', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '1.2em', fontWeight: 'bold', marginTop: '10px', boxShadow: '0 4px 15px rgba(46, 204, 113, 0.3)' }}>

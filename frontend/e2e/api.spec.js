@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('SmartBite Backend API Automation', () => {
   
   // Pointing directly to the Express Node.js backend port
-  const baseURL = 'http://localhost:5000';
+  const baseURL = '[http://127.0.0.1:5000](http://127.0.0.1:5000)';
 
   test('POST /api/recipes - Should successfully create a new recipe with macros', async ({ request }) => {
     

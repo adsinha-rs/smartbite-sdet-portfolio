@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('SmartBite E2E UI Automation', () => {
+  
+  test('Should add a new recipe and display the success message', async ({ page }) => {
+    // 1. Navigate to your live React dashboard
+    await page.goto('http://localhost:5173/');
+
+    // 2. Locate the input by its placeholder and type in a new recipe
+    await page.getByPlaceholder('e.g., Peanut Butter Banana Shake').fill('High Protein Oatmeal Pancakes');
+    
+    // 3. Select 'Breakfast' from the dropdown
+    await page.getByRole('combobox').selectOption('Breakfast');
+
+    // 4. Click the Save button
+    await page.getByRole('button', { name: 'Save Recipe' }).click();
+
+    // 5. SDET Assertion: Verify the exact success text renders on the screen
+    const successMessage = page.getByText('✅ Recipe Added Successfully!');
+    await expect(successMessage).toBeVisible();
+  });
+
+});
